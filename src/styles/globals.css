@@ -90,6 +90,7 @@ body {
 
 body {
     color: rgb(var(--foreground-rgb));
+    background: #d8ddde;
 }
 
 a {
