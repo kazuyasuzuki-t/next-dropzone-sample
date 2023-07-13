@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Grid, Button } from "@mui/material";
 
 import { DragAndDropGrid } from "@/components/DragAndDropGrid";
+import { FileWithRelativePath } from "@/hooks/useDragAndDrop";
 
 const parentBoxStyle = {
     margin: "36px",
@@ -17,7 +18,13 @@ const childrenBoxStyle = {
 const gridStyle = { flexGrow: 1 };
 
 export default function Home() {
-    const [gridCount, setgridCount] = useState(4);
+    const [gridCount, setgridCount] = useState<number>(4);
+    const [isDraggingForTransfer, setIsDraggingForTransfer] =
+        useState<boolean>(false);
+    // 親コンポーネントで管理しないとスコープの関係で別グリッドで参照できない
+    const [draggingFiles, setDraggingFiles] = useState<FileWithRelativePath[]>(
+        [],
+    );
 
     function handleAddGrid() {
         setgridCount((prevCount) =>
@@ -59,6 +66,10 @@ export default function Home() {
                         key={i}
                         title={`Grid ${i + 1}`}
                         gridCount={gridCount}
+                        isDraggingForTransfer={isDraggingForTransfer}
+                        setIsDraggingForTransfer={setIsDraggingForTransfer}
+                        draggingFiles={draggingFiles}
+                        setDraggingFiles={setDraggingFiles}
                     />
                 ))}
             </Grid>
