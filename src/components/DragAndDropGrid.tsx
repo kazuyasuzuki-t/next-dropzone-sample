@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Box, Grid, Button } from "@mui/material";
 
 import { FileWithRelativePath, useDragAndDrop } from "@/hooks/useDragAndDrop";
@@ -8,7 +8,21 @@ type Props = {
     gridCount: number;
 };
 
-export function DragAndDropColumn({ title, gridCount }: Props) {
+const getBoxStyle = (isDragging: boolean) => ({
+    height: "100%",
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    outline: "4px dashed transparent",
+    outlineColor: isDragging ? "#2196f3" : "transparent",
+    padding: "8px",
+});
+
+const getImgStyle = {
+    maxHeight: "120px",
+    width: "auto",
+};
+
+export const DragAndDropGrid = ({ title, gridCount }: Props) => {
     const [droppedFiles, setDroppedFiles] = useState<FileWithRelativePath[]>(
         [],
     );
@@ -29,6 +43,8 @@ export function DragAndDropColumn({ title, gridCount }: Props) {
         setDroppedFiles([]);
     }
 
+    const boxStyle = useMemo(() => getBoxStyle(isDragging), [isDragging]);
+
     return (
         <Grid
             height="100%"
@@ -38,16 +54,7 @@ export function DragAndDropColumn({ title, gridCount }: Props) {
             onDrop={handleDrop}
             lg={12 / gridCount}
         >
-            <Box
-                height="100%"
-                sx={{
-                    backgroundColor: "#fff",
-                    borderRadius: "8px",
-                    outline: "4px dashed transparent",
-                    outlineColor: isDragging ? "#2196f3" : "transparent",
-                    padding: "8px"
-                }}
-            >
+            <Box height="100%" sx={boxStyle}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <h2>{title}</h2>
                     <Button
@@ -58,19 +65,23 @@ export function DragAndDropColumn({ title, gridCount }: Props) {
                         CLEAR
                     </Button>
                 </Box>
+
                 <ul style={{ listStylePosition: "inside" }}>
                     {droppedFiles.map((fileWithRelativePath) => (
                         <li key={fileWithRelativePath.relativePath}>
                             {fileWithRelativePath.relativePath}
-                            {/* Fileなのでサムネイル表示などもできるはず */}
-                            {fileWithRelativePath.file.type === "image/png" && (
+                            <br />
+                            {/* imageの場合はサムネイル表示 */}
+                            {fileWithRelativePath.file.type.startsWith(
+                                "image",
+                            ) && (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
                                     src={URL.createObjectURL(
                                         fileWithRelativePath.file,
                                     )}
                                     alt={fileWithRelativePath.relativePath}
-                                    style={{ width: "100%" }}
+                                    style={getImgStyle}
                                 />
                             )}
                         </li>
@@ -79,4 +90,4 @@ export function DragAndDropColumn({ title, gridCount }: Props) {
             </Box>
         </Grid>
     );
-}
+};
