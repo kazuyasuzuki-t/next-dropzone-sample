@@ -43,9 +43,9 @@ export function DragAndDropColumn({ title, gridCount }: Props) {
                 sx={{
                     backgroundColor: "#fff",
                     borderRadius: "8px",
-                    border: "4px dashed transparent",
-                    borderColor: isDragging ? "#2196f3" : "transparent",
-                    marginX: "8px",
+                    outline: "4px dashed transparent",
+                    outlineColor: isDragging ? "#2196f3" : "transparent",
+                    padding: "8px"
                 }}
             >
                 <Box sx={{ display: "flex", alignItems: "center" }}>

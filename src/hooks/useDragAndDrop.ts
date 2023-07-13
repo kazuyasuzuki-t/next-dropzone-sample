@@ -26,10 +26,8 @@ export function useDragAndDrop(
         setIsDragging(true);
     }
 
-    function handleDragLeave(e: React.DragEvent<HTMLDivElement>) {
-        if (e.currentTarget === e.target) {
-            setIsDragging(false);
-        }
+    function handleDragLeave() {
+        setIsDragging(false);
     }
 
     function handleDragOver(e: React.DragEvent<HTMLDivElement>) {

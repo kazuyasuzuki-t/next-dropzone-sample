@@ -41,7 +41,7 @@ export default function Home() {
                 </Box>
             </Box>
 
-            <Grid container sx={{ flexGrow: 1 }}>
+            <Grid container sx={{ flexGrow: 1 }} gap={2} wrap="nowrap">
                 {[...Array(gridCount)].map((_, i) => (
                     <DragAndDropColumn
                         key={i}
