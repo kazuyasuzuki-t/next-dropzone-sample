@@ -15,6 +15,7 @@ const getBoxStyle = (isDragging: boolean) => ({
     outline: "4px dashed transparent",
     outlineColor: isDragging ? "#2196f3" : "transparent",
     padding: "8px",
+    PointerEvent: isDragging ? "none" : "auto",
 });
 
 const getImgStyle = {
