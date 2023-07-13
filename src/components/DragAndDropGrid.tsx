@@ -11,6 +11,7 @@ type Props = {
 const getBoxStyle = (isDragging: boolean) => ({
     height: "100%",
     backgroundColor: "#fff",
+    opacity: isDragging ? 0.6 : 1,
     borderRadius: "8px",
     outline: "4px dashed transparent",
     outlineColor: isDragging ? "#2196f3" : "transparent",
