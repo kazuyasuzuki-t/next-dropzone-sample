@@ -4,7 +4,7 @@ import { Box, Grid, Button } from "@mui/material";
 import { DragAndDropGrid } from "@/components/DragAndDropGrid";
 
 const parentBoxStyle = {
-    margin: "24px",
+    margin: "36px",
     display: "flex",
     flexDirection: "column",
 };
@@ -12,6 +12,7 @@ const childrenBoxStyle = {
     display: "flex",
     alignItems: "center",
     flexShrink: 0,
+    marginBottom: "16px",
 };
 const gridStyle = { flexGrow: 1 };
 
@@ -32,7 +33,7 @@ export default function Home() {
     return (
         <Box height="calc(100vh - 48px)" sx={parentBoxStyle}>
             <Box sx={childrenBoxStyle}>
-                <h1>dropzone</h1>
+                <h2>dropzone</h2>
                 <Box marginLeft="auto">
                     <span>Grid Count: </span>
                     <Button
